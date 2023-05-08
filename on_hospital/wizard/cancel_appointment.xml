@@ -24,8 +24,7 @@
             </field>
         </record>
 
-
-        <record id="action_cancel_appointment" model="ir.actions.act_window">
+        <record id="action_cancel_appointments" model="ir.actions.act_window">
             <field name="name">Cancel Appointment</field>
             <field name="res_model">cancel.appointment.wizard</field>
             <field name="view_mode">form</field>
@@ -36,9 +35,8 @@
         <menuitem
                 id="hospital_cancel_appointment"
                 name="Cancellation"
-                action="action_cancel_appointment"
+                action="action_cancel_appointments"
                 parent="hospital_appointment_root"
                 sequence="20"/>
-
     </data>
 </odoo>

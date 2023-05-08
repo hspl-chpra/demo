@@ -12,11 +12,13 @@
         'data/patient.tag.csv',
         'data/sequence_data.xml',
         'views/menu.xml',
+        'wizard/cancel_appointment.xml',
         'views/patient_view.xml',
         'views/female_patient_view.xml',
         'views/appoitment_view.xml',
         'views/patient_tag.xml',
-        'wizard/cancel_appointment.xml',
+        'views/play_ground.xml',
+
 
     ],
     'demo': [],

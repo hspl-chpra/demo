@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <field name="image" widget="image" class="oe_avatar "/>
+                        <field name="image" widget="image" class="oe_avatar"/>
                         <group>
                             <group>
                                 <field name="name"/>
@@ -21,11 +21,11 @@
                                 <field name="active" invisible="1"/>
                                 <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
                             </group>
-
                         </group>
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" options="{'open_attachments': True}"/>
+                        <field name="activity_ids"/>
                         <field name="message_ids"/>
                     </div>
                 </form>
@@ -76,7 +76,7 @@
             <field name="context">{'search_default_filter_male':1, 'search_default_group_by_gender':1}</field>
         </record>
 
-         <menuitem
+        <menuitem
                 id="hospital_patient_sub_menu"
                 name="Patient"
                 action="action_hospital_patient"

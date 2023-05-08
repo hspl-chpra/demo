@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_play_ground_form" model="ir.ui.view">
+            <field name="name">view.play.ground.form</field>
+            <field name="model">play.ground</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="model_id"/>
+                                <field name="code" widget="ace" options="{'mode': 'python'}"/>
+                            </group>
+                            <group>
+                                <button name="action_execute" string="Execute" type="object" class="btn-primary"/>
+                            </group>
+                            <group>
+                                <field name="result" widget="color"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    <record id="action_play_ground" model="ir.actions.act_window">
+        <field name="name">Play Ground</field>
+        <field name="res_model">play.ground</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem
+            id="play_ground_menu"
+            name="Play Ground"
+            action="action_play_ground"
+            parent="menu_playground"
+            sequence="2"/>
+        </data>
+</odoo>

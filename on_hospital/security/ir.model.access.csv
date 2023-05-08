@@ -4,3 +4,4 @@ on_hospital.access_hospital_appointment,access_hospital_appointment,on_hospital.
 on_hospital.access_appointment_pharmacy,access_appointment_pharmacy,on_hospital.model_appointment_pharmacy,base.group_user,1,1,1,1
 on_hospital.access_patient_tag,access_patient_tag,on_hospital.model_patient_tag,base.group_user,1,1,1,1
 on_hospital.access_cancel_appointment_wizard,access_cancel_appointment_wizard,on_hospital.model_cancel_appointment_wizard,base.group_user,1,1,1,1
+on_hospital.access_play_ground,access_play_ground,on_hospital.model_play_ground,base.group_user,1,1,1,1

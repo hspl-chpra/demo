@@ -4,7 +4,7 @@ from odoo import fields, models, api
 
 class HospitalPatient(models.Model):
     _name = 'hospital.patient'
-    _inherit = "mail.thread"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Hospital patient'
 
     name = fields.Char(string="Name", tracking=True)
@@ -16,7 +16,7 @@ class HospitalPatient(models.Model):
     appointment_id = fields.Many2one('hospital.appointment', string="Appointments")
     image = fields.Image(string="Image")
     tag_ids = fields.Many2many('patient.tag', string="Tags")
-
+    appointment_count = fields.Integer(string="Appointment Count")
     @api.model
     def create(self, vals):
         # print("..............",self.env['ir.sequence'])

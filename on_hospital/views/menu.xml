@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data>
 
     <menuitem
             id="hospital_main_menu"
@@ -10,20 +11,24 @@
             id="hospital_patient_menu"
             name="Patient details"
             parent="hospital_main_menu"
-            sequence="10"/>
+            sequence="1"/>
 
     <menuitem
             id="hospital_appointment_root"
             name="Appointment"
             parent="hospital_main_menu"
-            sequence="10"/>
-
+            sequence="2"/>
 
     <menuitem
             id="menu_configuration"
             name="Configuration"
             parent="hospital_main_menu"
-            sequence="20"/>
+            sequence="3"/>
+    <menuitem
+            id="menu_playground"
+            name="Play Ground"
+            parent="hospital_main_menu"
+            sequence="4"/>
 
-
+</data>
 </odoo>

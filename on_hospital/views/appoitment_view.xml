@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
         <record id="view_hospital_appointment_form" model="ir.ui.view">
             <field name="name">view.hospital.appointment.form</field>
             <field name="model">hospital.appointment</field>
@@ -12,10 +13,8 @@
                                 data-hotkey="i" states="draft"/>
                         <button name="action_draft" string="Reset to draft" type="object" class="oe_highlight"
                                 data-hotkey="j" states="in_consultation"/>
-                        <button name="%(on_hospital.action_cancel_appointment)d" string="Cancel" type="action" class="oe_highlight"
-                                data-hotkey="z"
-                                states="in_consultation, draft"/>
-                        <button name="action_cancel" string="Cancel" type="object" class="oe_highlight"
+                        <button name="%(on_hospital.action_cancel_appointments)d" string="Cancel" type="action"
+                                class="oe_highlight"
                                 data-hotkey="z"
                                 states="in_consultation, draft"/>
                         <button name="action_done" string="mark as a draft" type="object" class="oe_highlight"
@@ -39,9 +38,6 @@
                                 <field name="doctor_id"/>
                             </group>
                             <group>
-                                <field name="hide_sales_price" groups="base.group_no_one"
-                                       attrs="{'column_invisible': [('parent.hide_sales_price', '=', True)]}"
-                                />
                                 <field name="appointment_time" default_focus="1"/>
                                 <field name="booking_date"/>
                                 <button name="acton_done" type="object" string="Object_button"
@@ -84,7 +80,6 @@
             </field>
         </record>
 
-
         <record id="view_hospital_appointment_tree" model="ir.ui.view">
             <field name="name">view.hospital.appointment.tree</field>
             <field name="model">hospital.appointment</field>
@@ -102,11 +97,9 @@
                            decoration-info="state == 'draft'"
                            decoration-danger="state == 'cancel'"
                            decoration-warning="state =='in_consultation'"/>
-
                 </tree>
             </field>
         </record>
-
 
         <record id="view_hospital_appointment_activity" model="ir.ui.view">
             <field name="name">view.hospital.appointment.activity</field>
@@ -128,29 +121,18 @@
             </field>
         </record>
 
-        <record id="view_hospital_appointment_search" model="ir.ui.view">
-            <field name="name">view.hospital.appointment.search</field>
-            <field name="model">hospital.appointment</field>
-            <field name="arch" type="xml">
-                <search>
-                </search>
-            </field>
-        </record>
-
-        <record id="action_appointment_patient" model="ir.actions.act_window">
+        <record id="action_appointment_menu" model="ir.actions.act_window">
             <field name="name">Appointment</field>
             <field name="res_model">hospital.appointment</field>
             <field name="view_mode">tree,form,activity</field>
             <field name="context">{}</field>
         </record>
 
-
         <menuitem
-                id="hospital_appointment"
+                id="hospital_appointment_menu"
                 name="Appointments"
-                action="action_appointment_patient"
-                parent="hospital_appointment_root"
+                parent="on_hospital.hospital_appointment_root"
+                action="action_appointment_menu"
                 sequence="10"/>
-
     </data>
 </odoo>
