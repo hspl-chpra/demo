@@ -1,0 +1,4 @@
+id,name
+patient_tag_grapes,Grapes,True
+patient_tag_Mango,Mango,False
+patient_tag_cherry,Cherry,True

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="patient_tag_grapes" model="patient.tag">
+        <field name="name">Grapes</field>
+    </record>
+    <record id="patient_tag_cherry" model="patient.tag">
+        <field name="name">Cherry</field>
+    </record>
+    <record id="patient_tag_mango" model="patient.tag">
+        <field name="name">Mango</field>
+        <field name="active" eval="False"/>
+    </record>
+
+</odoo>
