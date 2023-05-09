@@ -10,6 +10,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
+                                <field name="sequence"/>
                             </group>
                             <group>
                                 <field name="color" widget="color_picker"/>
@@ -45,7 +46,7 @@
 
         <menuitem
                 id="hospital_patient"
-                name="Tag"
+                name=" Patient Tag"
                 action="action_patient_tag"
                 parent="menu_configuration"
                 sequence="0"/>

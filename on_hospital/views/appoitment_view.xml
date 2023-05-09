@@ -12,12 +12,13 @@
                                 class="oe_highlight"
                                 data-hotkey="i" states="draft"/>
                         <button name="action_draft" string="Reset to draft" type="object" class="oe_highlight"
-                                data-hotkey="j" states="in_consultation"/>
+                                data-hotkey="j" states="in_consultation,cancel"/>
                         <button name="%(on_hospital.action_cancel_appointments)d" string="Cancel" type="action"
                                 class="oe_highlight"
+                                context="{'default_reason': 'test', 'hide_appointment_id': 1}"
                                 data-hotkey="z"
                                 states="in_consultation, draft"/>
-                        <button name="action_done" string="mark as a draft" type="object" class="oe_highlight"
+                        <button name="action_done" string="mark as a done" type="object" class="oe_highlight"
                                 data-hotkey="v"
                                 states="in_consultation, cancel"/>
                         <field name="state" widget="statusbar" nolabel="1"

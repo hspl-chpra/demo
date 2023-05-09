@@ -1,5 +1,6 @@
 from datetime import date
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from odoo.exceptions import ValidationError
 
 
 class HospitalPatient(models.Model):
@@ -16,7 +17,23 @@ class HospitalPatient(models.Model):
     appointment_id = fields.Many2one('hospital.appointment', string="Appointments")
     image = fields.Image(string="Image")
     tag_ids = fields.Many2many('patient.tag', string="Tags")
-    appointment_count = fields.Integer(string="Appointment Count")
+    appointment_count = fields.Integer(string="Appointment Count", compute="_compute_appointment_count", store=True)
+    appointment_ids = fields.One2many('hospital.appointment', 'patient_id', string="Appointments")
+
+    def _compute_appointment_count(self):
+        for rec in self:
+            rec.appointment_count = self.env['hospital.appointment'].search_count([('patient_id', '=', rec.id)])
+
+    _sql_constraints = [
+        ('unique_name', 'unique(name)', 'Name must be unique')
+    ]
+
+    @api.constrains('date_of_birth')
+    def _check_date_of_birth(self):
+        for rec in self:
+            if rec.date_of_birth and rec.date_of_birth > fields.Date.today():
+                raise ValidationError(_("The entered date is not acceptable"))
+
     @api.model
     def create(self, vals):
         # print("..............",self.env['ir.sequence'])
