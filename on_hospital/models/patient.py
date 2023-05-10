@@ -17,9 +17,13 @@ class HospitalPatient(models.Model):
     appointment_id = fields.Many2one('hospital.appointment', string="Appointments")
     image = fields.Image(string="Image")
     tag_ids = fields.Many2many('patient.tag', string="Tags")
-    appointment_count = fields.Integer(string="Appointment Count", compute="_compute_appointment_count", store=True)
+    appointment_count = fields.Integer(string="Appointment Counter", compute="_compute_appointment_count", store=True)
     appointment_ids = fields.One2many('hospital.appointment', 'patient_id', string="Appointments")
+    parent = fields.Char(string="Parent")
+    marital_status = fields.Selection([('married', 'Married'), ('single', 'Single')], string="Marital Status", tracking=True)
+    partner_name = fields.Char(string="Partner name")
 
+    @api.depends('appointment_ids')
     def _compute_appointment_count(self):
         for rec in self:
             rec.appointment_count = self.env['hospital.appointment'].search_count([('patient_id', '=', rec.id)])
@@ -33,6 +37,12 @@ class HospitalPatient(models.Model):
         for rec in self:
             if rec.date_of_birth and rec.date_of_birth > fields.Date.today():
                 raise ValidationError(_("The entered date is not acceptable"))
+
+    @api.ondelete(at_uninstall=False)
+    def _check_appointment(self):
+        for record in self:
+            if record.appointment_ids:
+                raise ValidationError("you can not delete a patient with appointment")
 
     @api.model
     def create(self, vals):
@@ -63,4 +73,8 @@ class HospitalPatient(models.Model):
         #     name = record.ref + ' ' + record.name
         #     patient_list.append((record.id, name))
         return [(record.id, "[%s] %s" % (record.ref, record.name)) for record in self]
+
+    def action_test(self):
+        print("Clicked")
+        return
 

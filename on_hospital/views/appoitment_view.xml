@@ -87,6 +87,9 @@
             <field name="arch" type="xml">
                 <tree decoration-success="state == 'done'" decoration-danger="state == 'cancel'" sample="1"
                       multi_edit="1">
+                    <header>
+                        <button name="action_in_consultation" string="In Consultation" type="object"/>
+                    </header>
                     <field name="patient_id"/>
                     <field name="appointment_time"/>
                     <field name="booking_date" optional="show"/>
@@ -98,6 +101,15 @@
                            decoration-info="state == 'draft'"
                            decoration-danger="state == 'cancel'"
                            decoration-warning="state =='in_consultation'"/>
+                    <button name="action_done" type="object"
+                            attrs="{'invisible': [('state', '!=', 'in_consultation')]}"
+                            class="fa fa-check btn-success"/>
+                    <button name="%(on_hospital.action_cancel_appointments)d" class="fa fa-times btn-danger" type="action"
+                            attrs="{'invisible': [('state', 'not in', ('in_consultation','draft'))]}"/>
+                    <groupby name="patient_id">
+                        <button name="action_test" string="Click" type="object" class="oe_highlight"/>
+                        <button name="edit" string="Edit" type="edit"/>
+                    </groupby>
                 </tree>
             </field>
         </record>
