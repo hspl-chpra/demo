@@ -8,7 +8,7 @@ class HospitalAppointment(models.Model):
     _description = 'Hospital Appointment'
     _rec_name = 'patient_id'
 
-    patient_id = fields.Many2one('hospital.patient', string="Patient")
+    patient_id = fields.Many2one('hospital.patient', string="Patient", ondelete="restrict")
     gender = fields.Selection(related='patient_id.gender')
     ref = fields.Char(string="Reference", default="Odoo", help='Reference of the patient from patient records')
     appointment_time = fields.Datetime(string="Appointment Time",  default=fields.Datetime.now)
@@ -49,15 +49,16 @@ class HospitalAppointment(models.Model):
 
     def action_in_consultation(self):
         for record in self:
-            record.state = 'in_consultation'
+            if record.state == 'draft':
+                record.state = 'in_consultation'
 
     def action_draft(self):
         for record in self:
             record.state = 'draft'
 
-
-
     def action_done(self):
         for record in self:
             record.state = 'done'
+
+
 

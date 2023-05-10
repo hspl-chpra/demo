@@ -18,6 +18,7 @@
         'views/appoitment_view.xml',
         'views/patient_tag.xml',
         'views/play_ground.xml',
+        'views/res_config_setting_view.xml',
 
 
     ],
