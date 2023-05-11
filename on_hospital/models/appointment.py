@@ -9,6 +9,7 @@ class HospitalAppointment(models.Model):
     _rec_name = 'patient_id'
 
     patient_id = fields.Many2one('hospital.patient', string="Patient", ondelete="restrict")
+    test = fields.Char(string="Test")
     gender = fields.Selection(related='patient_id.gender')
     ref = fields.Char(string="Reference", default="Odoo", help='Reference of the patient from patient records')
     appointment_time = fields.Datetime(string="Appointment Time",  default=fields.Datetime.now)
