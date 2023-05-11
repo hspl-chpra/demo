@@ -19,7 +19,7 @@
         'views/patient_tag.xml',
         'views/play_ground.xml',
         'views/res_config_setting_view.xml',
-
+        'views/operation_view.xml',
 
     ],
     'demo': [],

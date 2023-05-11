@@ -7,6 +7,7 @@ class HospitalAppointment(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Hospital Appointment'
     _rec_name = 'patient_id'
+    _order = 'id desc'
 
     patient_id = fields.Many2one('hospital.patient', string="Patient", ondelete="restrict")
     gender = fields.Selection(related='patient_id.gender')
@@ -27,6 +28,7 @@ class HospitalAppointment(models.Model):
     doctor_id = fields.Many2one('res.users', string="Doctor", tracking=True)
     pharmacy_ids = fields.One2many('appointment.pharmacy','appointment_id', string='Pharmacy Lines')
     hide_sales_price = fields.Boolean(string="Hide sales prices")
+    operation_id = fields.Many2one('hospital.operation', string="Operations")
 
     @api.onchange('patient_id')
     def onchange_patient_id(self):
