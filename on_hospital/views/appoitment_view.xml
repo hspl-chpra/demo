@@ -33,10 +33,11 @@
                         </div>
                         <group>
                             <group>
-                                <field name="patient_id"/>
-                                <field name="ref"/>
+                                <field name="patient_id" widget="selection"/>
+                                <field name="ref" readonly="1" force_save="1"/>
                                 <field name="gender"/>
                                 <field name="doctor_id"/>
+                                <field name="operation_id"/>
                             </group>
                             <group>
                                 <field name="appointment_time" default_focus="1"/>

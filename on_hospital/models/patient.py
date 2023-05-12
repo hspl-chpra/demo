@@ -1,6 +1,7 @@
 from datetime import date
 from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
+from dateutil import relativedelta
 
 
 class HospitalPatient(models.Model):
@@ -9,7 +10,7 @@ class HospitalPatient(models.Model):
     _description = 'Hospital patient'
 
     name = fields.Char(string="Name", tracking=True)
-    age = fields.Integer(string="Age", tracking=True, compute="_compute_age", store=True)
+    age = fields.Integer(string="Age", tracking=True, compute="_compute_age", inverse="_inverse_age", search="search_age", store=True)
     date_of_birth = fields.Date(string="Date Of Birth", tracking=True)
     gender = fields.Selection([('male', 'Male'), ('female', 'female')], string="Gender", tracking=True, default='female')
     ref = fields.Char(string="Reference", default="Odoo")
@@ -22,6 +23,10 @@ class HospitalPatient(models.Model):
     parent = fields.Char(string="Parent")
     marital_status = fields.Selection([('married', 'Married'), ('single', 'Single')], string="Marital Status", tracking=True)
     partner_name = fields.Char(string="Partner name")
+    is_birthday = fields.Boolean(string='Birthday ?', compute="_compute_is_birthday")
+    phone = fields.Char(string="Phone")
+    email = fields.Char(string="Email")
+    website = fields.Char(string="Website")
 
     @api.depends('appointment_ids')
     def _compute_appointment_count(self):
@@ -67,6 +72,18 @@ class HospitalPatient(models.Model):
         else:
             self.age = 0
 
+    @api.depends('age')
+    def _inverse_age(self):
+        today = date.today()
+        for rec in self:
+            rec.date_of_birth = today - relativedelta.relativedelta(years=rec.age)
+
+    def search_age(self, operator, value):
+        date_of_birth =  date.today() - relativedelta.relativedelta(years=value)
+        start_of_year = date_of_birth.replace(day=1, month=1)
+        end_of_year = date_of_birth.replace(day=31, month=12)
+        return [('date_of_birth', ' >=', start_of_year), ('date_of_birth', '<=', end_of_year)]
+
     def name_get(self):
         # patient_list = []
         # for record in self:
@@ -78,3 +95,15 @@ class HospitalPatient(models.Model):
         print("Clicked")
         return
 
+    @api.depends('date_of_birth')
+    def _compute_is_birthday(self):
+        for rec in self:
+            is_birthday = False
+            if rec.date_of_birth:
+                today = date.today()
+                print("Today............", today)
+                print("Birth date............", rec.date_of_birth.day)
+                print("Birth month............", rec.date_of_birth.month)
+                if today.day == rec.date_of_birth.day and today.month == rec.date_of_birth.month:
+                    is_birthday = True
+            rec.is_birthday = is_birthday
